@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Auxmoney\OpentracingBundleGuzzle\Tests\Middleware;
 
 use Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection;
-use Auxmoney\OpentracingBundleGuzzle\Service\Tracing;
+use Auxmoney\OpentracingBundle\Service\Tracing;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 

@@ -1,0 +1,7 @@
+parameters:
+  paths:
+    - DependencyInjection
+    - Middleware
+
+  level: 7
+  inferPrivatePropertyTypeFromConstructor: true

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingBundleGuzzle\DependencyInjection;
 
+use Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -11,7 +12,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 use Symfony\Component\DependencyInjection\Reference;
-use Auxmoney\OpentracingBundle\Middleware\GuzzleTracingHeaderInjection;
 
 final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
 {

@@ -10,6 +10,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class OpentracingGuzzleBundle extends Bundle
 {
+    /**
+     * @return void
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);

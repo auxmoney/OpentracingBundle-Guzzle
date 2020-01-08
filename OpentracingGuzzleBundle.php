@@ -8,7 +8,7 @@ use Auxmoney\OpentracingBundleGuzzle\DependencyInjection\GuzzleHandlerStackCompi
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class OpentracingBundleGuzzle extends Bundle
+final class OpentracingGuzzleBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

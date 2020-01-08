@@ -4,10 +4,10 @@
   "license": "MIT",
   "require": {
     "php": "^7.1.13",
-    "auxmoney/opentracing-bundle-core": "dev-initial-release",
+    "auxmoney/opentracing-bundle-core": "dev-initial-release@dev",
+    "opentracing/opentracing": "1.0.0-beta5@beta",
     "guzzlehttp/guzzle": "^6.0"
   },
-  "minimum-stability": "dev",
   "require-dev": {
     "roave/security-advisories": "dev-master",
     "phpunit/phpunit": "^7.5",

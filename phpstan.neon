@@ -1,7 +1,10 @@
 parameters:
   paths:
-    - DependencyInjection
-    - Middleware
+    - .
+
+  excludes_analyse:
+    - Tests/*
+    - vendor/*
 
   level: 7
   inferPrivatePropertyTypeFromConstructor: true

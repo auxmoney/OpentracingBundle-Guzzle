@@ -1,4 +1,9 @@
 services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
   Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection: ~
 
   auxmoney_opentracing.guzzlehttp.default.handlerstack:

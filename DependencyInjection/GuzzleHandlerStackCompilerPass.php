@@ -22,23 +22,31 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
     {
         foreach ($container->getDefinitions() as $clientServiceName => $definition) {
             if ($definition->getClass() === Client::class) {
-                $configuration = $this->getConfiguration($definition);
-
-                if (isset($configuration['handler'])) {
-                    $handlerServiceName = (string) $configuration['handler'];
-                    $this->addMiddlewareToExistingHandler(
-                        $definition,
-                        $container->getDefinition($handlerServiceName),
-                        $clientServiceName,
-                        $handlerServiceName
-                    );
-                    continue;
-                }
-
-                $configuration['handler'] = new Reference('auxmoney_opentracing.guzzlehttp.default.handlerstack');
-                $definition->setArguments([$configuration]);
+                $this->addMiddlewareToHandlerStack($container, $definition, $clientServiceName);
             }
         }
+    }
+
+    private function addMiddlewareToHandlerStack(
+        ContainerBuilder $container,
+        Definition $definition,
+        string $clientServiceName
+    ): void {
+        $configuration = $this->getConfiguration($definition);
+
+        if (isset($configuration['handler'])) {
+            $handlerServiceName = (string)$configuration['handler'];
+            $this->addMiddlewareToExistingHandler(
+                $definition,
+                $container->getDefinition($handlerServiceName),
+                $clientServiceName,
+                $handlerServiceName
+            );
+            return;
+        }
+
+        $configuration['handler'] = new Reference('auxmoney_opentracing.guzzlehttp.default.handlerstack');
+        $definition->setArguments([$configuration]);
     }
 
     /**

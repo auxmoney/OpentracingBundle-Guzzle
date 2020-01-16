@@ -18,7 +18,7 @@ final class OpentracingGuzzleExtension extends Extension
      * @return void
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader(
             $container,

@@ -18,7 +18,7 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
     /**
      * @return void
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         foreach ($container->getDefinitions() as $clientServiceName => $definition) {
             if ($definition->getClass() === Client::class) {

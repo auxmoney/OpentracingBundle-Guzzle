@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection: ~
+
+  auxmoney_opentracing.guzzlehttp.default.handlerstack:
+    class: GuzzleHttp\HandlerStack
+    factory: ['GuzzleHttp\HandlerStack', 'create']
+    calls:
+      - [push, ['@Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection']]

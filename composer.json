@@ -1,10 +1,20 @@
 {
   "name": "auxmoney/opentracing-bundle-guzzle",
+  "description": "Symfony Opentracing bundle extension for Guzzle",
+  "keywords": [
+    "auxmoney",
+    "opentracing",
+    "opentracing-bundle",
+    "symfony",
+    "symfony-bundle",
+    "distributed-tracing",
+    "guzzle"
+  ],
   "type": "symfony-bundle",
   "license": "MIT",
   "require": {
-    "php": "^7.1.13",
-    "auxmoney/opentracing-bundle-core": "dev-initial-release@dev",
+    "php": "^7.1.33",
+    "auxmoney/opentracing-bundle-core": "^0.3",
     "opentracing/opentracing": "1.0.0-beta5@beta",
     "guzzlehttp/guzzle": "^6.0"
   },

@@ -27,7 +27,7 @@ class GuzzleTracingHeaderInjectionTest extends TestCase
         $this->tracingService->injectTracingHeaders($originalRequest->reveal())->shouldBeCalled()->willReturn($injectedRequest->reveal());
 
         $subject = new GuzzleTracingHeaderInjection($this->tracingService->reveal());
-        $handler = $subject(function ($request, $options) {
+        $handler = $subject(function ($request) {
             return $request;
         });
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingBundleGuzzle\DependencyInjection;
 
+use Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleRequestSpanning;
 use Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
@@ -74,6 +75,7 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
     ): void {
         if ($handlerDefinition->getClass() === HandlerStack::class) {
             $handlerDefinition->addMethodCall('push', [new Reference(GuzzleTracingHeaderInjection::class)]);
+            $handlerDefinition->addMethodCall('push', [new Reference(GuzzleRequestSpanning::class)]);
             $clientDefinition->addTag('auxmoney_opentracing.enabled');
             return;
         }

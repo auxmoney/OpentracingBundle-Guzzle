@@ -74,8 +74,8 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
         string $handlerServiceName
     ): void {
         if ($handlerDefinition->getClass() === HandlerStack::class) {
-            $handlerDefinition->addMethodCall('push', [new Reference(GuzzleTracingHeaderInjection::class)]);
             $handlerDefinition->addMethodCall('push', [new Reference(GuzzleRequestSpanning::class)]);
+            $handlerDefinition->addMethodCall('push', [new Reference(GuzzleTracingHeaderInjection::class)]);
             $clientDefinition->addTag('auxmoney_opentracing.enabled');
             return;
         }

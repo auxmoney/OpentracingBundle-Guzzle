@@ -11,5 +11,5 @@ services:
     class: GuzzleHttp\HandlerStack
     factory: ['GuzzleHttp\HandlerStack', 'create']
     calls:
-      - [push, ['@Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection']]
       - [push, ['@Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleRequestSpanning']]
+      - [push, ['@Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection']]

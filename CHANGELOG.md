@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.3.1...v0.3.2) (2020-01-28)
+
+
+### Bug Fixes
+
+* nest spans correctly ([#7](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/7)) ([e8dfd92](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/e8dfd92bfcdfde3021216beffe5492bfcdd09282))
+
 ### [0.3.1](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.3.0...v0.3.1) (2020-01-25)
 
 

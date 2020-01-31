@@ -13,3 +13,9 @@ docker run -d --rm --name jaeger \
   jaegertracing/all-in-one:1.16
 ./wait-for-it.sh localhost:16686
 sleep 3
+docker ps
+mkdir build/
+ORIGIN_DIR=`pwd`
+cd build/
+
+cd ${ORIGIN_DIR}

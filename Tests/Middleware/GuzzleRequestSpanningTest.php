@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Auxmoney\OpentracingBundleGuzzle\Tests\Middleware;
+namespace Auxmoney\OpentracingGuzzleBundle\Tests\Middleware;
 
 use Auxmoney\OpentracingBundle\Internal\Decorator\RequestSpanning;
 use Auxmoney\OpentracingBundle\Service\Tracing;
-use Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleRequestSpanning;
+use Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleRequestSpanning;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7\Request;

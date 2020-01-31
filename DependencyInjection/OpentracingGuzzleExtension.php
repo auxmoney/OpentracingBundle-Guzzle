@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auxmoney\OpentracingBundleGuzzle\DependencyInjection;
+namespace Auxmoney\OpentracingGuzzleBundle\DependencyInjection;
 
 use Exception;
 use Symfony\Component\Config\FileLocator;

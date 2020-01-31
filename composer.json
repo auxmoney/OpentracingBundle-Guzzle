@@ -29,12 +29,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Auxmoney\\OpentracingBundleGuzzle\\": "./"
+      "Auxmoney\\OpentracingGuzzleBundle\\": "./"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Auxmoney\\OpentracingBundleGuzzle\\Tests\\": "./Tests/"
+      "Auxmoney\\OpentracingGuzzleBundle\\Tests\\": "./Tests/"
     }
   },
   "scripts": {

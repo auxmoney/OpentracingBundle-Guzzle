@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Auxmoney\OpentracingBundleGuzzle\DependencyInjection;
+namespace Auxmoney\OpentracingGuzzleBundle\DependencyInjection;
 
-use Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleRequestSpanning;
-use Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection;
+use Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleRequestSpanning;
+use Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleTracingHeaderInjection;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

@@ -4,12 +4,12 @@ services:
     autoconfigure: true
     public: false
 
-  Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection: ~
-  Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleRequestSpanning: ~
+  Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleTracingHeaderInjection: ~
+  Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleRequestSpanning: ~
 
   auxmoney_opentracing.guzzlehttp.default.handlerstack:
     class: GuzzleHttp\HandlerStack
     factory: ['GuzzleHttp\HandlerStack', 'create']
     calls:
-      - [push, ['@Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleRequestSpanning']]
-      - [push, ['@Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection']]
+      - [push, ['@Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleRequestSpanning']]
+      - [push, ['@Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleTracingHeaderInjection']]

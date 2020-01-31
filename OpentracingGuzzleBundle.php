@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Auxmoney\OpentracingBundleGuzzle;
+namespace Auxmoney\OpentracingGuzzleBundle;
 
-use Auxmoney\OpentracingBundleGuzzle\DependencyInjection\GuzzleHandlerStackCompilerPass;
+use Auxmoney\OpentracingGuzzleBundle\DependencyInjection\GuzzleHandlerStackCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

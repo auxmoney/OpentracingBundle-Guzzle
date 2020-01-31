@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Auxmoney\OpentracingBundleGuzzle\Tests\DependencyInjection;
+namespace Auxmoney\OpentracingGuzzleBundle\Tests\DependencyInjection;
 
-use Auxmoney\OpentracingBundleGuzzle\DependencyInjection\GuzzleHandlerStackCompilerPass;
+use Auxmoney\OpentracingGuzzleBundle\DependencyInjection\GuzzleHandlerStackCompilerPass;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use PHPUnit\Framework\TestCase;

@@ -28,7 +28,6 @@ jobs:
         - composer run-script phpunit-functional
       after_success:
         - docker ps
-        - ps aux
         - echo "done"
 
 before_install:

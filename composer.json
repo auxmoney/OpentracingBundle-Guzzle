@@ -49,7 +49,10 @@
     "phpmd": "vendor/bin/phpmd . text cleancode,codesize,controversial,design,naming,unusedcode --exclude vendor,Tests",
     "phpcs": "vendor/bin/phpcs",
     "phpunit": "phpdbg -qrr vendor/bin/phpunit --colors=never --testsuite=unit",
-    "phpunit-functional": "vendor/bin/phpunit --colors=never --testsuite=functional --no-coverage",
+    "phpunit-functional": [
+      "symfony -V",
+      "vendor/bin/phpunit --colors=never --testsuite=functional --no-coverage"
+    ],
     "phpstan": "vendor/bin/phpstan analyse --no-progress"
   }
 }

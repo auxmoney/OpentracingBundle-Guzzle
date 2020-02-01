@@ -24,10 +24,11 @@ jobs:
       before_script:
         - wget https://get.symfony.com/cli/installer -O - | bash
         - sudo mv /home/travis/.symfony/bin/symfony /usr/local/bin/symfony
-        - symfony -V
       script:
         - composer run-script phpunit-functional
       after_success:
+        - docker ps
+        - ps aux
         - echo "done"
 
 before_install:

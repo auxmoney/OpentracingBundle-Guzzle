@@ -22,6 +22,7 @@ jobs:
       env: SYMFONY_VERSION="5.0.*"
       services: docker
       script:
+        - wget https://get.symfony.com/cli/installer -O - | bash
         - composer run-script phpunit-functional
       after_success:
         - echo "done"

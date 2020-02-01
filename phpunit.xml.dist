@@ -24,7 +24,7 @@
         </testsuite>
         <testsuite name="functional">
             <directory>./Tests/Functional/</directory>
-            <exclude>./Tests/Functional/Mock</exclude>
+            <exclude>./Tests/Functional/TestProjectFiles</exclude>
         </testsuite>
     </testsuites>
 

@@ -25,7 +25,9 @@
     "squizlabs/php_codesniffer": "^3.5",
     "phpmd/phpmd": "^2.7",
     "php-coveralls/php-coveralls": "^2.2",
-    "symfony/process": "*"
+    "symfony/process": "*",
+    "symfony/yaml": "*",
+    "mtdowling/jmespath.php": "^2.5"
   },
   "autoload": {
     "psr-4": {

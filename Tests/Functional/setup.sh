@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
+wget https://get.symfony.com/cli/installer -O - | bash
 docker run -d --rm --name jaeger \
   -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
   -p 5775:5775/udp \
@@ -13,9 +14,17 @@ docker run -d --rm --name jaeger \
   jaegertracing/all-in-one:1.16
 ./wait-for-it.sh localhost:16686
 sleep 3
-docker ps
 mkdir build/
 ORIGIN_DIR=`pwd`
+BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
 cd build/
-
+symfony new --version=stable --no-git testproject
+cd testproject
+composer config minimum-stability dev # TODO: remove as soon as all dependencies  (opentracing, jaeger-php) are released as stable version
+composer config prefer-stable true    # TODO: remove as soon as all dependencies  (opentracing, jaeger-php) are released as stable version
+composer require auxmoney/opentracing-bundle-jaeger auxmoney/opentracing-bundle-guzzle:dev-${BRANCH}
+yes | cp -rf ${ORIGIN_DIR}/Tests/Functional/TestProjectFiles/* .
+composer dump-autoload
+symfony console cache:clear
+symfony local:server:start -d
 cd ${ORIGIN_DIR}

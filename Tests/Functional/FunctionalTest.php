@@ -40,20 +40,20 @@ children:
         value: GET
       -
         key: http.url
-        value: 'https://localhost:8000/'
+        value: 'http://localhost:8000/'
       -
         key: http.status_code
         value: 200
     children:
       -
-        operationName: 'https://localhost:8000/'
+        operationName: 'http://localhost:8000/'
         tags:
           -
             key: http.method
             value: GET
           -
             key: http.url
-            value: 'https://localhost:8000/'
+            value: 'http://localhost:8000/'
         children:
           -
             operationName: 'App\Controller\TestController::index'

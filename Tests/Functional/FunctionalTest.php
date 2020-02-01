@@ -100,11 +100,13 @@ EOT
         $client = new Client();
         $response = $client->get(sprintf('http://localhost:16686/api/traces/%s?raw=true', $traceId));
         $contents = json_decode($response->getBody()->getContents(), true);
+        // FIXME: cut here and extract
         return jmesSearch('data[0].spans', $contents);
     }
 
     private function getTraceAsYAML($spans): string
     {
+        // FIXME: extract, maybe base on complete trace object
         $spanData = jmesSearch(
             '[].{operationName: operationName, spanID: spanID, references: references, tags: tags[?key==\'http.status_code\' || key==\'command.exit-code\' || key==\'http.url\' || key==\'http.method\'].{key: key, value: value}}',
             $spans

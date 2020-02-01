@@ -20,6 +20,7 @@ symfony new --version=stable --no-git testproject
 cd testproject/
 composer config minimum-stability dev # TODO: remove as soon as all dependencies  (opentracing, jaeger-php) are released as stable version
 composer config prefer-stable true    # TODO: remove as soon as all dependencies  (opentracing, jaeger-php) are released as stable version
+# FIXME: cut here, separate and extract scripts to require custom packages per project
 composer require auxmoney/opentracing-bundle-jaeger auxmoney/opentracing-bundle-guzzle:dev-${BRANCH}
 yes | cp -rf ${ORIGIN_DIR}/Tests/Functional/TestProjectFiles/* .
 composer dump-autoload

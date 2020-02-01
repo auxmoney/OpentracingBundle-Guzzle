@@ -3,4 +3,4 @@ services:
     class: GuzzleHttp\Client
     arguments:
       $config:
-        base_uri: 'https://localhost:8000'
+        base_uri: 'http://localhost:8000'

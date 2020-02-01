@@ -27,5 +27,5 @@ composer require auxmoney/opentracing-bundle-jaeger auxmoney/opentracing-bundle-
 yes | cp -rf ${ORIGIN_DIR}/Tests/Functional/TestProjectFiles/* .
 composer dump-autoload
 symfony console cache:clear
-symfony local:server:start -d
+symfony local:server:start -d --no-tls
 cd ${ORIGIN_DIR}

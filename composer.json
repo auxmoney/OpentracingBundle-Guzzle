@@ -51,7 +51,9 @@
     "phpunit": "phpdbg -qrr vendor/bin/phpunit --colors=never --testsuite=unit",
     "phpunit-functional": [
       "symfony -V",
-      "vendor/bin/phpunit --colors=never --testsuite=functional --no-coverage"
+      "Tests/Functional/setup.sh",
+      "vendor/bin/phpunit --colors=never --testsuite=functional --no-coverage",
+      "Tests/Functional/teardown.sh"
     ],
     "phpstan": "vendor/bin/phpstan analyse --no-progress"
   }

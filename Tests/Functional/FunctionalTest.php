@@ -82,14 +82,16 @@ EOT
     public function setUp() {
         parent::setUp();
 
-        $p = new Process(['Tests/Functional/setup.sh']);
+        $p = new Process(['docker', 'start', 'jaeger']);
         $p->mustRun();
+
+        sleep(3);
     }
 
     protected function tearDown() {
         parent::tearDown();
 
-        $p = new Process(['Tests/Functional/teardown.sh']);
+        $p = new Process(['docker', 'stop', 'jaeger']);
         $p->mustRun();
     }
 

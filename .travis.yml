@@ -4,49 +4,61 @@ dist: bionic
 
 jobs:
   include:
-    - php: '7.1'
-      env: SYMFONY_VERSION="3.4.*"
-    - php: '7.4'
-      env: SYMFONY_VERSION="3.4.*"
-    - php: '7.2'
-      env: SYMFONY_VERSION="4.4.*"
-    - php: '7.4'
-      env: SYMFONY_VERSION="4.4.*"
-    - php: '7.2'
-      env: SYMFONY_VERSION="5.0.*"
-    - php: '7.4'
-      env: SYMFONY_VERSION="5.0.*"
-    - stage: test-functional
+#    - php: '7.1'
+#      env: SYMFONY_VERSION="3.4.*"
+#    - php: '7.4'
+#      env: SYMFONY_VERSION="3.4.*"
+#    - php: '7.2'
+#      env: SYMFONY_VERSION="4.4.*"
+#    - php: '7.4'
+#      env: SYMFONY_VERSION="4.4.*"
+#    - php: '7.2'
+#      env: SYMFONY_VERSION="5.0.*"
+#    - php: '7.4'
+#      env: SYMFONY_VERSION="5.0.*"
+#    - stage: test-functional
+#      php: '7.4'
+#      env: SYMFONY_VERSION="3.4.*"
+#      services: docker
+#      before_script:
+#        - wget https://get.symfony.com/cli/installer -O - | bash
+#        - sudo mv /home/travis/.symfony/bin/symfony /usr/local/bin/symfony
+#      script:
+#        - composer run-script phpunit-functional
+#      after_success:
+#        - docker ps
+#    - stage: test-functional
+#      php: '7.4'
+#      env: SYMFONY_VERSION="4.4.*"
+#      services: docker
+#      before_script:
+#        - wget https://get.symfony.com/cli/installer -O - | bash
+#        - sudo mv /home/travis/.symfony/bin/symfony /usr/local/bin/symfony
+#      script:
+#        - composer run-script phpunit-functional
+#      after_success:
+#        - docker ps
+#    - stage: test-functional
+#      php: '7.4'
+#      env: SYMFONY_VERSION="5.0.*"
+#      services: docker
+#      before_script:
+#        - wget https://get.symfony.com/cli/installer -O - | bash
+#        - sudo mv /home/travis/.symfony/bin/symfony /usr/local/bin/symfony
+#      script:
+#        - composer run-script phpunit-functional
+#      after_success:
+#        - docker ps
+    - stage: test-debug
       php: '7.4'
-      env: SYMFONY_VERSION="3.4.*"
+      env: SYMFONY_VERSION="5.0.*"
       services: docker
       before_script:
         - wget https://get.symfony.com/cli/installer -O - | bash
         - sudo mv /home/travis/.symfony/bin/symfony /usr/local/bin/symfony
       script:
-        - composer run-script phpunit-functional
-      after_success:
-        - docker ps
-    - stage: test-functional
-      php: '7.4'
-      env: SYMFONY_VERSION="4.4.*"
-      services: docker
-      before_script:
-        - wget https://get.symfony.com/cli/installer -O - | bash
-        - sudo mv /home/travis/.symfony/bin/symfony /usr/local/bin/symfony
-      script:
-        - composer run-script phpunit-functional
-      after_success:
-        - docker ps
-    - stage: test-functional
-      php: '7.4'
-      env: SYMFONY_VERSION="5.0.*"
-      services: docker
-      before_script:
-        - wget https://get.symfony.com/cli/installer -O - | bash
-        - sudo mv /home/travis/.symfony/bin/symfony /usr/local/bin/symfony
-      script:
-        - composer run-script phpunit-functional
+        - sudo systemctl --all | grep php
+        - sudo ps aux
       after_success:
         - docker ps
 

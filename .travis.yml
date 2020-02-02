@@ -58,6 +58,7 @@ jobs:
         - sudo mv /home/travis/.symfony/bin/symfony /usr/local/bin/symfony
       script:
         - sudo netstat -nltp
+        - composer run-script phpunit-functional
       after_success:
         - docker ps
 

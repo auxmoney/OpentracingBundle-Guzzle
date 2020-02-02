@@ -57,8 +57,7 @@ jobs:
         - wget https://get.symfony.com/cli/installer -O - | bash
         - sudo mv /home/travis/.symfony/bin/symfony /usr/local/bin/symfony
       script:
-        - sudo systemctl --all | grep php
-        - sudo ps aux
+        - sudo netstat -nltp
       after_success:
         - docker ps
 

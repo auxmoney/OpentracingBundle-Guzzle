@@ -12,7 +12,6 @@ then
     exit 2;
 fi
 
-docker rm jaeger || true
 docker run -d --name jaeger \
   -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
   -p 5775:5775/udp \

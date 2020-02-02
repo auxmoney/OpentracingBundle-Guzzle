@@ -2,7 +2,7 @@
 
 cd build/testproject
 symfony local:server:stop
+symfony local:server:list
 cd ../../
 rm -fr build/testproject
-docker rm jaeger
 exit 0

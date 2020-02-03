@@ -17,7 +17,7 @@ class FunctionalTest extends TestCase
     /**
      * @dataProvider provideProjectSetups
      */
-    public function testNestedSpansAndHeaderPropagation(): void
+    public function testNestedSpansAndHeaderPropagation(string $projectSetup): void
     {
         $this->setUpTestProject('noHandler');
 
@@ -88,16 +88,16 @@ EOT
     public function provideProjectSetups(): array
     {
         return [
-            ['no handler' => ['noHandler']],
-            ['existing handler' => ['existingHandler']],
-            ['existing handler stack' => ['existingHandlerStack']],
+            'no handler' => ['noHandler'],
+            'existing handler' => ['existingHandler'],
+            'existing handler stack' => ['existingHandlerStack'],
         ];
     }
 
-    protected function setUpTestProject(string $projectFilesFolderName): void
+    protected function setUpTestProject(string $projectSetup): void
     {
         $filesystem = new Filesystem();
-        $filesystem->mirror(sprintf('Tests/Functional/TestProjectFiles/%s/', $projectFilesFolderName), 'build/testproject/');
+        $filesystem->mirror(sprintf('Tests/Functional/TestProjectFiles/%s/', $projectSetup), 'build/testproject/');
 
         $p = new Process(['composer', 'dump-autoload'], 'build/testproject');
         $p->mustRun();
@@ -129,7 +129,7 @@ EOT
         parent::tearDown();
     }
 
-    private function getSpansFromJaegerAPI(string $traceId): array
+    protected function getSpansFromJaegerAPI(string $traceId): array
     {
         $client = new Client();
         $response = $client->get(sprintf('http://localhost:16686/api/traces/%s?raw=true', $traceId));
@@ -138,7 +138,7 @@ EOT
         return jmesSearch('data[0].spans', $contents);
     }
 
-    private function getTraceAsYAML($spans): string
+    protected function getTraceAsYAML($spans): string
     {
         // FIXME: extract, maybe base on complete trace object
         $spanData = jmesSearch(

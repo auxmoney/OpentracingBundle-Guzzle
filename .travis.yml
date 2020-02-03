@@ -18,7 +18,9 @@ jobs:
       env: SYMFONY_VERSION="5.0.*"
     - stage: test-functional
       php: '7.4'
-      env: SYMFONY_VERSION="3.4.*"
+      env:
+        - SYMFONY_VERSION="3.4.*"
+        - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
       services: docker
       before_script:
         - wget https://get.symfony.com/cli/installer -O - | bash
@@ -29,7 +31,9 @@ jobs:
         - docker ps
     - stage: test-functional
       php: '7.4'
-      env: SYMFONY_VERSION="4.4.*"
+      env:
+        - SYMFONY_VERSION="4.4.*"
+        - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
       services: docker
       before_script:
         - wget https://get.symfony.com/cli/installer -O - | bash
@@ -40,7 +44,9 @@ jobs:
         - docker ps
     - stage: test-functional
       php: '7.4'
-      env: SYMFONY_VERSION="5.0.*"
+      env:
+        - SYMFONY_VERSION="5.0.*"
+        - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
       services: docker
       before_script:
         - wget https://get.symfony.com/cli/installer -O - | bash

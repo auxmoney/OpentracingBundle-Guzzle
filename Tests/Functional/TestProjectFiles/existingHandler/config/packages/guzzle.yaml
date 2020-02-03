@@ -1,0 +1,7 @@
+services:
+  GuzzleHttp\ClientInterface:
+    class: GuzzleHttp\Client
+    arguments:
+      $config:
+        base_uri: 'http://localhost:8000'
+        handler: '@App\Service\TestHandler'

@@ -7,15 +7,21 @@ namespace Auxmoney\OpentracingGuzzleBundle\Tests\Functional;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
 use function JmesPath\search as jmesSearch;
 
 class FunctionalTest extends TestCase
 {
+    /**
+     * @dataProvider provideProjectSetups
+     */
     public function testNestedSpansAndHeaderPropagation(): void
     {
-        $p = new Process(['symfony', 'php', 'build/testproject/bin/console', 'test:guzzle']);
+        $this->setUpTestProject('noHandler');
+
+        $p = new Process(['symfony', 'console', 'test:guzzle'], 'build/testproject');
         $p->mustRun();
         $output = $p->getOutput();
         $traceId = substr($output, 0, strpos($output, ':'));
@@ -79,7 +85,30 @@ EOT
             , $traceAsYAML);
     }
 
-    public function setUp() {
+    public function provideProjectSetups(): array
+    {
+        return [
+            ['no handler' => ['noHandler']],
+            ['existing handler' => ['existingHandler']],
+            ['existing handler stack' => ['existingHandlerStack']],
+        ];
+    }
+
+    protected function setUpTestProject(string $projectFilesFolderName): void
+    {
+        $filesystem = new Filesystem();
+        $filesystem->mirror(sprintf('Tests/Functional/TestProjectFiles/%s/', $projectFilesFolderName), 'build/testproject/');
+
+        $p = new Process(['composer', 'dump-autoload'], 'build/testproject');
+        $p->mustRun();
+        $p = new Process(['symfony', 'console', 'cache:clear'], 'build/testproject');
+        $p->mustRun();
+        $p = new Process(['symfony', 'local:server:start', '-d', '--no-tls'], 'build/testproject');
+        $p->mustRun();
+    }
+
+    public function setUp()
+    {
         parent::setUp();
 
         $p = new Process(['docker', 'start', 'jaeger']);
@@ -88,11 +117,16 @@ EOT
         sleep(3);
     }
 
-    protected function tearDown() {
-        parent::tearDown();
-
+    protected function tearDown()
+    {
+        $p = new Process(['symfony', 'local:server:stop'], 'build/testproject');
+        $p->mustRun();
+        $p = new Process(['git', 'reset', '--hard', 'reset'], 'build/testproject');
+        $p->mustRun();
         $p = new Process(['docker', 'stop', 'jaeger']);
         $p->mustRun();
+
+        parent::tearDown();
     }
 
     private function getSpansFromJaegerAPI(string $traceId): array

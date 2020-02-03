@@ -25,6 +25,7 @@
     "squizlabs/php_codesniffer": "^3.5",
     "phpmd/phpmd": "^2.7",
     "php-coveralls/php-coveralls": "^2.2",
+    "symfony/filesystem": "*",
     "symfony/process": "*",
     "symfony/yaml": "*",
     "mtdowling/jmespath.php": "^2.5"
@@ -50,10 +51,12 @@
     "phpcs": "vendor/bin/phpcs",
     "phpunit": "phpdbg -qrr vendor/bin/phpunit --colors=never --testsuite=unit",
     "phpunit-functional": [
-      "symfony -V",
-      "Tests/Functional/setup.sh",
+      "Tests/Functional/Scripts/checkEnvironment.sh",
+      "Tests/Functional/Scripts/setup.sh",
+      "Tests/Functional/Scripts/requireAdditionalVendors.sh",
+      "Tests/Functional/Scripts/createResetPoint.sh",
       "vendor/bin/phpunit --colors=never --testsuite=functional --no-coverage",
-      "Tests/Functional/teardown.sh"
+      "Tests/Functional/Scripts/teardown.sh"
     ],
     "phpstan": "vendor/bin/phpstan analyse --no-progress"
   }

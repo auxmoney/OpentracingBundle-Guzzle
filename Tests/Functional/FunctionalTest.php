@@ -19,7 +19,7 @@ class FunctionalTest extends TestCase
      */
     public function testNestedSpansAndHeaderPropagation(string $projectSetup): void
     {
-        $this->setUpTestProject('noHandler');
+        $this->setUpTestProject($projectSetup);
 
         $p = new Process(['symfony', 'console', 'test:guzzle'], 'build/testproject');
         $p->mustRun();

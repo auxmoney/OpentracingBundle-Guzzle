@@ -8,10 +8,10 @@ use Auxmoney\OpentracingBundle\Internal\Opentracing;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use Jaeger\Span;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use const OpenTracing\Formats\TEXT_MAP;
 
 class TestCommand extends Command
 {
@@ -32,10 +32,11 @@ class TestCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $request = new Request('GET', '/');
-        $contents = $this->client->send($request)->getBody()->getContents();
-        /** @var Span $span */
-        $span = $this->opentracing->getTracerInstance()->getActiveSpan();
-        $output->writeln($span->getContext()->buildString());
+        $this->client->send($request)->getBody()->getContents();
+
+        $carrier = [];
+        $this->opentracing->getTracerInstance()->inject($this->opentracing->getTracerInstance()->getActiveSpan()->getContext(), TEXT_MAP, $carrier);
+        $output->writeln(current($carrier));
         return 0;
     }
 }

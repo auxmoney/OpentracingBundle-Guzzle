@@ -98,13 +98,7 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
         foreach ($existingCalls as $existingCall) {
             if ($existingCall[0] === 'push') {
                 $reference = $existingCall[1][0];
-                if ($reference instanceof Reference
-                    && in_array(
-                        $reference->__toString(),
-                        [GuzzleRequestSpanning::class, GuzzleTracingHeaderInjection::class],
-                        true
-                    )
-                ) {
+                if ($this->referencesAreAlreadyPushed($reference)) {
                     return;
                 }
             }
@@ -112,5 +106,18 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
 
         $handlerDefinition->addMethodCall('push', [new Reference(GuzzleRequestSpanning::class)]);
         $handlerDefinition->addMethodCall('push', [new Reference(GuzzleTracingHeaderInjection::class)]);
+    }
+
+    /**
+     * @param mixed $reference
+     */
+    private function referencesAreAlreadyPushed($reference): bool
+    {
+        return $reference instanceof Reference
+            && in_array(
+                $reference->__toString(),
+                [GuzzleRequestSpanning::class, GuzzleTracingHeaderInjection::class],
+                true
+            );
     }
 }

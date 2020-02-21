@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.3.2...v0.4.0) (2020-02-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* namespace correction, bug fix (#9) and functional tests (#8)
+
+### Bug Fixes
+
+* namespace correction, bug fix ([#9](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/9)) and functional tests ([#8](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/8)) ([d8d8f53](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/d8d8f533438e3863cf8eafbc321e6d443e96db3b))
+
 ### [0.3.2](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.3.1...v0.3.2) (2020-01-28)
 
 

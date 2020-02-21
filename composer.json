@@ -14,7 +14,7 @@
   "license": "MIT",
   "require": {
     "php": "^7.1.33",
-    "auxmoney/opentracing-bundle-core": "dev-functional-tests@dev as 0.3.5",
+    "auxmoney/opentracing-bundle-core": "dev-functional-tests@dev as v0.3.6",
     "opentracing/opentracing": "1.0.0-beta5@beta",
     "guzzlehttp/guzzle": "^6.0"
   },

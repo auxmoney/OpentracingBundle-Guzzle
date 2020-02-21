@@ -94,18 +94,25 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
 
     private function addUniqueMethodCallsToHandlerStack(Definition $handlerDefinition): void
     {
-        $existingCalls = $handlerDefinition->getMethodCalls();
-        foreach ($existingCalls as $existingCall) {
-            if ($existingCall[0] === 'push') {
-                $reference = $existingCall[1][0];
-                if ($this->referencesAreAlreadyPushed($reference)) {
-                    return;
-                }
-            }
+        if ($this->areCallsAlreadyAdded($handlerDefinition)) {
+            return;
         }
 
         $handlerDefinition->addMethodCall('push', [new Reference(GuzzleRequestSpanning::class)]);
         $handlerDefinition->addMethodCall('push', [new Reference(GuzzleTracingHeaderInjection::class)]);
+    }
+
+    private function areCallsAlreadyAdded(Definition $handlerDefinition): bool
+    {
+        $callsAlreadyAdded = false;
+        $existingCalls = $handlerDefinition->getMethodCalls();
+        foreach ($existingCalls as $existingCall) {
+            if ($existingCall[0] === 'push') {
+                $reference = $existingCall[1][0];
+                $callsAlreadyAdded = $callsAlreadyAdded || $this->referencesAreAlreadyPushed($reference);
+            }
+        }
+        return $callsAlreadyAdded;
     }
 
     /**

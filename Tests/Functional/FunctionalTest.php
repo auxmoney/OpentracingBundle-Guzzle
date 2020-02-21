@@ -32,18 +32,10 @@ class FunctionalTest extends JaegerFunctionalTest
     public function provideProjectSetups(): array
     {
         return [
-//            'no handler' => ['noHandler'],
-//            'existing handler' => ['existingHandler'],
-//            'existing handler stack' => ['existingHandlerStack'],
+            'no handler' => ['noHandler'],
+            'existing handler' => ['existingHandler'],
+            'existing handler stack' => ['existingHandlerStack'],
             'multiple existing handler stacks' => ['existingHandlerStacks'],
         ];
-    }
-
-    protected function tearDown()
-    {
-        $p = new Process(['symfony', 'local:server:stop'], 'build/testproject');
-        $p->mustRun();
-        $p = new Process(['docker', 'stop', 'jaeger']);
-        $p->mustRun();
     }
 }

@@ -33,8 +33,8 @@ class FunctionalTest extends JaegerFunctionalTest
     {
         return [
             'no handler' => ['noHandler'],
-            'existing handler' => ['existingHandler'],
             'existing handler stack' => ['existingHandlerStack'],
+            'multiple existing handler stacks' => ['existingHandlerStacks'],
         ];
     }
 }

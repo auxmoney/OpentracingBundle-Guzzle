@@ -23,12 +23,14 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
     {
         foreach ($container->getDefinitions() as $clientServiceName => $definition) {
             if ($definition->getClass() === Client::class) {
-                $this->addMiddlewareToHandlerStack($container, $definition, $clientServiceName);
+                $this->addMiddlewareToClient($container, $definition, $clientServiceName);
+            } elseif ($definition->getClass() === HandlerStack::class) {
+                $this->addUniqueMethodCallsToHandlerStack($definition);
             }
         }
     }
 
-    private function addMiddlewareToHandlerStack(
+    private function addMiddlewareToClient(
         ContainerBuilder $container,
         Definition $definition,
         string $clientServiceName
@@ -74,8 +76,7 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
         string $handlerServiceName
     ): void {
         if ($handlerDefinition->getClass() === HandlerStack::class) {
-            $handlerDefinition->addMethodCall('push', [new Reference(GuzzleRequestSpanning::class)]);
-            $handlerDefinition->addMethodCall('push', [new Reference(GuzzleTracingHeaderInjection::class)]);
+            $this->addUniqueMethodCallsToHandlerStack($handlerDefinition);
             $clientDefinition->addTag('auxmoney_opentracing.enabled');
             return;
         }
@@ -89,5 +90,27 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
                 HandlerStack::class
             )
         );
+    }
+
+    private function addUniqueMethodCallsToHandlerStack(Definition $handlerDefinition): void
+    {
+        $existingCalls = $handlerDefinition->getMethodCalls();
+        foreach ($existingCalls as $existingCall) {
+            if ($existingCall[0] === 'push') {
+                $reference = $existingCall[1][0];
+                if ($reference instanceof Reference
+                    && in_array(
+                        $reference->__toString(),
+                        [GuzzleRequestSpanning::class, GuzzleTracingHeaderInjection::class],
+                        true
+                    )
+                ) {
+                    return;
+                }
+            }
+        }
+
+        $handlerDefinition->addMethodCall('push', [new Reference(GuzzleRequestSpanning::class)]);
+        $handlerDefinition->addMethodCall('push', [new Reference(GuzzleTracingHeaderInjection::class)]);
     }
 }

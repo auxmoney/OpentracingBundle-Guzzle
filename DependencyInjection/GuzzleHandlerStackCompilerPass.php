@@ -99,7 +99,12 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
             if ($existingCall[0] === 'push') {
                 $reference = $existingCall[1][0];
                 if ($reference instanceof Reference
-                        && in_array($reference->__toString(), [GuzzleRequestSpanning::class, GuzzleTracingHeaderInjection::class], true)) {
+                    && in_array(
+                        $reference->__toString(),
+                        [GuzzleRequestSpanning::class, GuzzleTracingHeaderInjection::class],
+                        true
+                    )
+                ) {
                     return;
                 }
             }

@@ -1,0 +1,11 @@
+services:
+  auxmoney.opentracing.guzzlehttp.test.handlerstack:
+    class: GuzzleHttp\HandlerStack
+    factory: ['GuzzleHttp\HandlerStack', 'create']
+
+  GuzzleHttp\ClientInterface:
+    class: GuzzleHttp\Client
+    arguments:
+      $config:
+        base_uri: 'http://localhost:8000'
+        handler: '@auxmoney.opentracing.guzzlehttp.test.handlerstack'

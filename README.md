@@ -1,5 +1,13 @@
 # auxmoney OpentracingBundle - Guzzle
 
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/auxmoney/OpentracingBundle-Guzzle)
+![Travis (.org)](https://img.shields.io/travis/auxmoney/OpentracingBundle-Guzzle)
+![Coveralls github](https://img.shields.io/coveralls/github/auxmoney/OpentracingBundle-Guzzle)
+![Codacy Badge](https://api.codacy.com/project/badge/Grade/aab701199e104bb6bdb247a4bdf7f5f2)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/auxmoney/OpentracingBundle-Guzzle)
+![Scrutinizer code quality (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/quality/g/auxmoney/OpentracingBundle-Guzzle)
+![GitHub](https://img.shields.io/github/license/auxmoney/OpentracingBundle-Guzzle)
+
 This bundle adds automatic header injection for Guzzle clients to the [OpentracingBundle](https://github.com/auxmoney/OpentracingBundle-core).
 
 ## Installation
@@ -29,12 +37,12 @@ If you are not using it, you need to manually enable the bundle:
 
 ```php
     # Symfony 3: AppKernel.php
-    $bundles[] = new Auxmoney\OpentracingBundleGuzzle\OpentracingGuzzleBundle();
+    $bundles[] = new Auxmoney\OpentracingGuzzleBundle\OpentracingGuzzleBundle();
 ```
 
 ```php
-    # Symfony 4: bundles.php
-    Auxmoney\OpentracingBundleGuzzle\OpentracingGuzzleBundle::class => ['all' => true],
+    # Symfony 4+: bundles.php
+    Auxmoney\OpentracingGuzzleBundle\OpentracingGuzzleBundle::class => ['all' => true],
 ```
 
 ## Configuration

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Auxmoney\OpentracingBundleGuzzle\DependencyInjection;
+namespace Auxmoney\OpentracingGuzzleBundle\DependencyInjection;
 
-use Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleRequestSpanning;
-use Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection;
+use Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleRequestSpanning;
+use Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleTracingHeaderInjection;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -23,12 +23,14 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
     {
         foreach ($container->getDefinitions() as $clientServiceName => $definition) {
             if ($definition->getClass() === Client::class) {
-                $this->addMiddlewareToHandlerStack($container, $definition, $clientServiceName);
+                $this->addMiddlewareToClient($container, $definition, $clientServiceName);
+            } elseif ($definition->getClass() === HandlerStack::class) {
+                $this->addUniqueMethodCallsToHandlerStack($definition);
             }
         }
     }
 
-    private function addMiddlewareToHandlerStack(
+    private function addMiddlewareToClient(
         ContainerBuilder $container,
         Definition $definition,
         string $clientServiceName
@@ -74,8 +76,7 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
         string $handlerServiceName
     ): void {
         if ($handlerDefinition->getClass() === HandlerStack::class) {
-            $handlerDefinition->addMethodCall('push', [new Reference(GuzzleRequestSpanning::class)]);
-            $handlerDefinition->addMethodCall('push', [new Reference(GuzzleTracingHeaderInjection::class)]);
+            $this->addUniqueMethodCallsToHandlerStack($handlerDefinition);
             $clientDefinition->addTag('auxmoney_opentracing.enabled');
             return;
         }
@@ -89,5 +90,41 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
                 HandlerStack::class
             )
         );
+    }
+
+    private function addUniqueMethodCallsToHandlerStack(Definition $handlerDefinition): void
+    {
+        if ($this->areCallsAlreadyAdded($handlerDefinition)) {
+            return;
+        }
+
+        $handlerDefinition->addMethodCall('push', [new Reference(GuzzleRequestSpanning::class)]);
+        $handlerDefinition->addMethodCall('push', [new Reference(GuzzleTracingHeaderInjection::class)]);
+    }
+
+    private function areCallsAlreadyAdded(Definition $handlerDefinition): bool
+    {
+        $callsAlreadyAdded = false;
+        $existingCalls = $handlerDefinition->getMethodCalls();
+        foreach ($existingCalls as $existingCall) {
+            if ($existingCall[0] === 'push') {
+                $reference = $existingCall[1][0];
+                $callsAlreadyAdded = $callsAlreadyAdded || $this->referencesAreAlreadyPushed($reference);
+            }
+        }
+        return $callsAlreadyAdded;
+    }
+
+    /**
+     * @param mixed $reference
+     */
+    private function referencesAreAlreadyPushed($reference): bool
+    {
+        return $reference instanceof Reference
+            && in_array(
+                $reference->__toString(),
+                [GuzzleRequestSpanning::class, GuzzleTracingHeaderInjection::class],
+                true
+            );
     }
 }

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Auxmoney\OpentracingBundleGuzzle\Tests\DependencyInjection;
+namespace Auxmoney\OpentracingGuzzleBundle\Tests\DependencyInjection;
 
-use Auxmoney\OpentracingBundleGuzzle\DependencyInjection\OpentracingGuzzleExtension;
-use Auxmoney\OpentracingBundleGuzzle\Middleware\GuzzleTracingHeaderInjection;
+use Auxmoney\OpentracingGuzzleBundle\DependencyInjection\OpentracingGuzzleExtension;
+use Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleTracingHeaderInjection;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

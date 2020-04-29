@@ -6,7 +6,3 @@ services:
 
   Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleTracingHeaderInjection: ~
   Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleRequestSpanning: ~
-
-  auxmoney_opentracing.guzzlehttp.default.handlerstack:
-    class: GuzzleHttp\HandlerStack
-    factory: ['GuzzleHttp\HandlerStack', 'create']

@@ -50,17 +50,11 @@ class GuzzleHandlerStackCompilerPassTest extends TestCase
         $container = new ContainerBuilder();
         $container->addDefinitions(['noclient' => $noClientDefinition->reveal(), 'client' => $clientDefinition->reveal()]);
 
-        $clientDefinition->getArguments()->willReturn($arguments);
-
-        $noClientDefinition->setArguments(Argument::any())->shouldNotBeCalled();
-        $clientDefinition->setArguments(Argument::that(function ($config) {
-            return is_array($config)
-                && isset($config[0]['handler'])
-                && $config[0]['handler'] instanceof Reference
-                && (string) $config[0]['handler'] === 'auxmoney_opentracing.guzzlehttp.default.handlerstack';
-        }))->shouldBeCalled();
+        self::assertCount(3, $container->getDefinitions());
 
         $this->subject->process($container);
+
+        self::assertCount(4, $container->getDefinitions());
     }
 
     public function provideHandlerConfigWithoutHandler(): array
@@ -91,15 +85,11 @@ class GuzzleHandlerStackCompilerPassTest extends TestCase
             ]
         );
 
-        $clientDefinition->getArguments()->willReturn($arguments);
-
-        $noClientDefinition->setArguments(Argument::any())->shouldNotBeCalled();
-        $noClientDefinition->setArguments(Argument::any())->shouldNotBeCalled();
-        $clientDefinition->addTag('auxmoney_opentracing.enabled')->shouldBeCalled();
+        self::assertCount(4, $container->getDefinitions());
 
         $this->subject->process($container);
 
-        self::assertCount(2, $handlerDefinition->getMethodCalls());
+        self::assertCount(5, $container->getDefinitions());
     }
 
     /**
@@ -124,17 +114,11 @@ class GuzzleHandlerStackCompilerPassTest extends TestCase
             ]
         );
 
-        $clientDefinition->getArguments()->willReturn($arguments);
-        $otherClientDefinition->getArguments()->willReturn($arguments);
-
-        $noClientDefinition->setArguments(Argument::any())->shouldNotBeCalled();
-        $noClientDefinition->setArguments(Argument::any())->shouldNotBeCalled();
-        $clientDefinition->addTag('auxmoney_opentracing.enabled')->shouldBeCalled();
-        $otherClientDefinition->addTag('auxmoney_opentracing.enabled')->shouldBeCalled();
+        self::assertCount(5, $container->getDefinitions());
 
         $this->subject->process($container);
 
-        self::assertCount(2, $handlerDefinition->getMethodCalls());
+        self::assertCount(7, $container->getDefinitions());
     }
 
     public function provideHandlerConfigWithHandler(): array
@@ -143,34 +127,5 @@ class GuzzleHandlerStackCompilerPassTest extends TestCase
             ['config indexed by number' => [0 => ['verify' => false, 'handler' => new Reference('handlerServiceName')]]],
             ['config indexed by name' => ['$config' => ['verify' => false, 'handler' => new Reference('handlerServiceName')]]],
         ];
-    }
-
-    public function testProcessHandlerConfigWithHandlerButNoHandlerStack(): void
-    {
-        $noClientDefinition = $this->prophesize(Definition::class);
-        $noClientDefinition->getClass()->willReturn(Definition::class);
-        $clientDefinition = $this->prophesize(Definition::class);
-        $clientDefinition->getClass()->willReturn(Client::class);
-        $handlerDefinition = $this->prophesize(Definition::class);
-        $handlerDefinition->getClass()->willReturn(Definition::class);
-        $container = new ContainerBuilder();
-        $container->addDefinitions(
-            [
-                'noclient' => $noClientDefinition->reveal(),
-                'client' => $clientDefinition->reveal(),
-                'handlerServiceName' => $handlerDefinition->reveal()
-            ]
-        );
-
-        $clientDefinition->getArguments()->willReturn([0 => ['verify' => false, 'handler' => new Reference('handlerServiceName')]]);
-
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessageRegExp('/you cannot use the guzzle plugin/');
-        $noClientDefinition->setArguments(Argument::any())->shouldNotBeCalled();
-        $clientDefinition->setArguments(Argument::any())->shouldNotBeCalled();
-        $clientDefinition->addTag('auxmoney_opentracing.enabled')->shouldNotBeCalled();
-        $handlerDefinition->addMethodCall('push', Argument::any())->shouldNotBeCalled();
-
-        $this->subject->process($container);
     }
 }

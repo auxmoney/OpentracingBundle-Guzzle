@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingGuzzleBundle\DependencyInjection;
 
+use Auxmoney\OpentracingGuzzleBundle\Decorator\GuzzleClientFactoryDecorator;
 use Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleRequestSpanning;
 use Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleTracingHeaderInjection;
 use GuzzleHttp\Client;
-use GuzzleHttp\HandlerStack;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 use Symfony\Component\DependencyInjection\Reference;
 
 final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
@@ -23,108 +22,24 @@ final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
     {
         foreach ($container->getDefinitions() as $clientServiceName => $definition) {
             if ($definition->getClass() === Client::class) {
-                $this->addMiddlewareToClient($container, $definition, $clientServiceName);
-            } elseif ($definition->getClass() === HandlerStack::class) {
-                $this->addUniqueMethodCallsToHandlerStack($definition);
+                $this->addClientServiceDecorator($container, $clientServiceName);
             }
         }
     }
 
-    private function addMiddlewareToClient(
-        ContainerBuilder $container,
-        Definition $definition,
-        string $clientServiceName
-    ): void {
-        $configuration = $this->getConfiguration($definition);
-
-        if (isset($configuration['handler'])) {
-            $handlerServiceName = (string)$configuration['handler'];
-            $this->addMiddlewareToExistingHandler(
-                $definition,
-                $container->getDefinition($handlerServiceName),
-                $clientServiceName,
-                $handlerServiceName
-            );
-            return;
-        }
-
-        $configuration['handler'] = new Reference('auxmoney_opentracing.guzzlehttp.default.handlerstack');
-        $definition->setArguments([$configuration]);
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    private function getConfiguration(Definition $definition): array
+    private function addClientServiceDecorator(ContainerBuilder $container, string $clientServiceName): void
     {
-        $arguments = $definition->getArguments();
+        $decoratorDefinition = new Definition();
+        $decoratorDefinition->setClass(Client::class);
+        $decoratorDefinition->setDecoratedService($clientServiceName);
+        $decoratorDefinition->setFactory([GuzzleClientFactoryDecorator::class, 'decorate']);
 
-        $configuration = [];
-        if (isset($arguments[0])) {
-            $configuration = $arguments[0];
-        } elseif (isset($arguments['$config'])) {
-            $configuration = $arguments['$config'];
-        }
+        $decoratorDefinition->setArguments([
+            new Reference($clientServiceName . '.auxmoney_guzzle' . '.inner'),
+            new Reference(GuzzleRequestSpanning::class),
+            new Reference(GuzzleTracingHeaderInjection::class),
+        ]);
 
-        return $configuration;
-    }
-
-    private function addMiddlewareToExistingHandler(
-        Definition $clientDefinition,
-        Definition $handlerDefinition,
-        string $clientServiceName,
-        string $handlerServiceName
-    ): void {
-        if ($handlerDefinition->getClass() === HandlerStack::class) {
-            $this->addUniqueMethodCallsToHandlerStack($handlerDefinition);
-            $clientDefinition->addTag('auxmoney_opentracing.enabled');
-            return;
-        }
-
-        throw new RuntimeException(
-            sprintf(
-                'The Guzzle client service named "%s" has a configured handler "%s", which is not a %s,'
-                    . ' you cannot use the guzzle plugin until you refactored this!',
-                $clientServiceName,
-                $handlerServiceName,
-                HandlerStack::class
-            )
-        );
-    }
-
-    private function addUniqueMethodCallsToHandlerStack(Definition $handlerDefinition): void
-    {
-        if ($this->areCallsAlreadyAdded($handlerDefinition)) {
-            return;
-        }
-
-        $handlerDefinition->addMethodCall('push', [new Reference(GuzzleRequestSpanning::class)]);
-        $handlerDefinition->addMethodCall('push', [new Reference(GuzzleTracingHeaderInjection::class)]);
-    }
-
-    private function areCallsAlreadyAdded(Definition $handlerDefinition): bool
-    {
-        $callsAlreadyAdded = false;
-        $existingCalls = $handlerDefinition->getMethodCalls();
-        foreach ($existingCalls as $existingCall) {
-            if ($existingCall[0] === 'push') {
-                $reference = $existingCall[1][0];
-                $callsAlreadyAdded = $callsAlreadyAdded || $this->referencesAreAlreadyPushed($reference);
-            }
-        }
-        return $callsAlreadyAdded;
-    }
-
-    /**
-     * @param mixed $reference
-     */
-    private function referencesAreAlreadyPushed($reference): bool
-    {
-        return $reference instanceof Reference
-            && in_array(
-                $reference->__toString(),
-                [GuzzleRequestSpanning::class, GuzzleTracingHeaderInjection::class],
-                true
-            );
+        $container->setDefinition($clientServiceName . '.auxmoney_guzzle', $decoratorDefinition);
     }
 }

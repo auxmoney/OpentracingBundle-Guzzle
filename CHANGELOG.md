@@ -1,3 +1,10 @@
+## [0.5.4](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.5.3...v0.5.4) (2020-04-30)
+
+
+### Bug Fixes
+
+* travis environment ([#20](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/20)) ([aefc54d](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/aefc54d81e184f3a851e1be2d3d92c57a59a8098))
+
 ## [0.5.3](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.5.2...v0.5.3) (2020-04-30)
 
 

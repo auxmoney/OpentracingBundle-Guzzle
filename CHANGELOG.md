@@ -1,3 +1,17 @@
+## [0.5.2](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.5.1...v0.5.2) (2020-04-07)
+
+
+### Bug Fixes
+
+* add guzzle promise onRejected handler ([#18](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/18)) ([d236d57](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/d236d575076cba179cf2324bd146f4f9354d89c9))
+
+## [0.5.1](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.5.0...v0.5.1) (2020-03-27)
+
+
+### Bug Fixes
+
+* upgrade core and documentation ([#14](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/14)) ([37b5c16](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/37b5c1609892fad0e78a88e0732af0b556e19372))
+
 # [0.5.0](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.4.2...v0.5.0) (2020-03-20)
 
 

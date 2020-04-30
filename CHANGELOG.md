@@ -1,3 +1,10 @@
+## [0.5.3](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.5.2...v0.5.3) (2020-04-30)
+
+
+### Bug Fixes
+
+* allow functionals from forks ([#19](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/19)) ([4b6c93c](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/4b6c93cd64077598c090a703e301401e16f6d0df))
+
 ## [0.5.2](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.5.1...v0.5.2) (2020-04-07)
 
 

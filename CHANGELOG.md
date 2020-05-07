@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.5.4...v0.6.0) (2020-05-07)
+
+
+### Features
+
+* allow factory created clients to be decorated ([#16](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/16)) ([4177efe](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/4177efe6a9ebe630ba5f2353c0d8977a4fd07e13))
+
 ## [0.5.4](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.5.3...v0.5.4) (2020-04-30)
 
 

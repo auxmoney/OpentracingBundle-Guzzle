@@ -18,7 +18,6 @@ class NoHandlerStackTest extends JaegerFunctionalTest
         $process = new Process(['symfony', 'console', 'cache:clear'], self::BUILD_TESTPROJECT);
         $returnCode = $process->run();
 
-        self::assertSame(1, $returnCode);
-        self::assertContains('The Guzzle client service named "', $process->getErrorOutput());
+        self::assertSame(0, $returnCode);
     }
 }

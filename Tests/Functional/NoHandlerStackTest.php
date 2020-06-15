@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingGuzzleBundle\Tests\Functional;
 
-use Auxmoney\OpentracingBundle\Tests\Functional\JaegerFunctionalTest;
+use Auxmoney\OpentracingBundle\Tests\Functional\JaegerConsoleFunctionalTest;
 use Symfony\Component\Process\Process;
 
-class NoHandlerStackTest extends JaegerFunctionalTest
+class NoHandlerStackTest extends JaegerConsoleFunctionalTest
 {
     public function testExceptionWithoutHandlerStack(): void
     {

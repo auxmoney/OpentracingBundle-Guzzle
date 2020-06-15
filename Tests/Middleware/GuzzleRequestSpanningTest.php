@@ -33,6 +33,7 @@ class GuzzleRequestSpanningTest extends TestCase
     {
         $this->requestSpanning->start('GET', '/foo-uri')->shouldBeCalled();
         $this->requestSpanning->finish(201)->shouldBeCalled();
+        $this->tracing->setTagOfActiveSpan('auxmoney-opentracing-bundle.span-origin', 'guzzle:request')->shouldBeCalled();
         $this->tracing->finishActiveSpan()->shouldBeCalled();
 
         $subject = new GuzzleRequestSpanning($this->requestSpanning->reveal(), $this->tracing->reveal());
@@ -57,6 +58,7 @@ class GuzzleRequestSpanningTest extends TestCase
         $this->requestSpanning->start('GET', '/foo-uri')->shouldBeCalled();
         $this->requestSpanning->finish(Argument::any())->shouldNotBeCalled();
         $this->tracing->logInActiveSpan(Argument::any())->shouldBeCalled();
+        $this->tracing->setTagOfActiveSpan('auxmoney-opentracing-bundle.span-origin', 'guzzle:request')->shouldBeCalled();
         $this->tracing->finishActiveSpan()->shouldBeCalled();
 
         $subject = new GuzzleRequestSpanning($this->requestSpanning->reveal(), $this->tracing->reveal());

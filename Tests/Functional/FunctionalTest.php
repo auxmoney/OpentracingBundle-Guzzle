@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingGuzzleBundle\Tests\Functional;
 
-use Auxmoney\OpentracingBundle\Tests\Functional\JaegerFunctionalTest;
+use Auxmoney\OpentracingBundle\Tests\Functional\JaegerWebFunctionalTest;
 use Symfony\Component\Process\Process;
 
-class FunctionalTest extends JaegerFunctionalTest
+class FunctionalTest extends JaegerWebFunctionalTest
 {
     /**
      * @dataProvider provideProjectSetups

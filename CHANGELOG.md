@@ -1,3 +1,10 @@
+## [0.6.1](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.6.0...v0.6.1) (2020-06-16)
+
+
+### Bug Fixes
+
+* add span origin tag ([#21](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/21)) ([6de1a37](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/6de1a37d8d7d61654a3091851f0b6c2ec476b8a6))
+
 # [0.6.0](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.5.4...v0.6.0) (2020-05-07)
 
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingGuzzleBundle\Tests\Functional;
 
-use Auxmoney\OpentracingBundle\Tests\Functional\JaegerFunctionalTest;
+use Auxmoney\OpentracingBundle\Tests\Functional\JaegerWebFunctionalTest;
 use Symfony\Component\Process\Process;
 
-class FunctionalTest extends JaegerFunctionalTest
+class FunctionalTest extends JaegerWebFunctionalTest
 {
     /**
      * @dataProvider provideProjectSetups
@@ -25,7 +25,7 @@ class FunctionalTest extends JaegerFunctionalTest
         $spans = $this->getSpansFromTrace($this->getTraceFromJaegerAPI($traceId));
         self::assertCount(5, $spans);
 
-        $traceAsYAML = $this->getSpansAsYAML($spans, '[].{operationName: operationName, startTime: startTime, spanID: spanID, references: references, tags: tags[?key==\'http.status_code\' || key==\'command.exit-code\' || key==\'http.url\' || key==\'http.method\'].{key: key, value: value}}');
+        $traceAsYAML = $this->getSpansAsYAML($spans, '[].{operationName: operationName, startTime: startTime, spanID: spanID, references: references, tags: tags[?key==\'http.status_code\' || key==\'command.exit-code\' || key==\'http.url\' || key==\'http.method\' || key==\'auxmoney-opentracing-bundle.span-origin\'].{key: key, value: value}}');
         self::assertStringEqualsFile(__DIR__ . '/FunctionalTest.expected.yaml', $traceAsYAML);
     }
 

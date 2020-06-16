@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingGuzzleBundle\Middleware;
 
+use Auxmoney\OpentracingBundle\Internal\Constant;
 use Auxmoney\OpentracingBundle\Internal\Decorator\RequestSpanning;
 use Auxmoney\OpentracingBundle\Service\Tracing;
 use GuzzleHttp\Exception\RequestException;
@@ -26,6 +27,7 @@ final class GuzzleRequestSpanning
     {
         return function (RequestInterface $request, array $options) use ($handler) {
             $this->requestSpanning->start($request->getMethod(), $request->getUri()->__toString());
+            $this->tracing->setTagOfActiveSpan(Constant::SPAN_ORIGIN, 'guzzle:request');
 
             /** @var PromiseInterface $promise */
             $promise = $handler($request, $options);

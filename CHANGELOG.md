@@ -1,3 +1,10 @@
+## [0.6.2](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.6.1...v0.6.2) (2020-12-27)
+
+
+### Bug Fixes
+
+* replace Travis with GitHub ([#22](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/22)) ([d6935e1](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/d6935e118a6d37cbdd922daf303fa6737d071fbf))
+
 ## [0.6.1](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.6.0...v0.6.1) (2020-06-16)
 
 

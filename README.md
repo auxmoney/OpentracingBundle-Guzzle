@@ -1,8 +1,7 @@
 # auxmoney OpentracingBundle - Guzzle
 
-![release](https://github.com/auxmoney/OpentracingBundle-Guzzle/workflows/release/badge.svg)
+[![test](https://github.com/auxmoney/OpentracingBundle-Guzzle/workflows/test/badge.svg)](https://github.com/auxmoney/OpentracingBundle-Guzzle/actions?query=workflow%3Atest)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/auxmoney/OpentracingBundle-Guzzle)
-![Travis (.org)](https://img.shields.io/travis/auxmoney/OpentracingBundle-Guzzle)
 ![Coveralls github](https://img.shields.io/coveralls/github/auxmoney/OpentracingBundle-Guzzle)
 ![Codacy Badge](https://api.codacy.com/project/badge/Grade/aab701199e104bb6bdb247a4bdf7f5f2)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/auxmoney/OpentracingBundle-Guzzle)

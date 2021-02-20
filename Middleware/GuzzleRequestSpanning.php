@@ -61,9 +61,11 @@ final class GuzzleRequestSpanning
                 'stack' => $exception->getTraceAsString(),
             ]
         );
+
         if ($exception->hasResponse()) {
             $this->requestSpanning->finish($exception->getResponse()->getStatusCode());
         }
+        
         $this->tracing->finishActiveSpan();
     }
 }

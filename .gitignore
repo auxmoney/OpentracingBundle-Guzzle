@@ -3,4 +3,3 @@ composer.lock
 /.php-version
 /build/
 /vendor/
-/*.code-workspace

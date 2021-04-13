@@ -15,12 +15,12 @@ use PHPUnit\Framework\TestCase;
 
 class GuzzleClientFactoryDecoratorTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
     }
 
-    public function testdecorateClient(): void
+    public function testDecorateClient(): void
     {
         $client = $this->prophesize(Client::class);
         $handlerStack = $this->prophesize(HandlerStack::class);
@@ -40,7 +40,7 @@ class GuzzleClientFactoryDecoratorTest extends TestCase
         self::assertSame($client->reveal(), $clientReturned);
     }
 
-    public function testdecorateNoClient(): void
+    public function testDecorateNoClient(): void
     {
         $client = $this->prophesize(Client::class);
         $requestSpanning = $this->prophesize(RequestSpanning::class);

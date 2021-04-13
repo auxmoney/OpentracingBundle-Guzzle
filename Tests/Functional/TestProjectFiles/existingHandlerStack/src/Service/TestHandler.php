@@ -8,7 +8,7 @@ use Psr\Http\Message\RequestInterface;
 
 class TestHandler
 {
-    public function __invoke()
+    public function __invoke(): callable
     {
         $header = 'a';
         $value = 'b';

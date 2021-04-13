@@ -22,7 +22,7 @@ class GuzzleRequestSpanningTest extends TestCase
     private $requestSpanning;
     private $tracing;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->requestSpanning = $this->prophesize(RequestSpanning::class);

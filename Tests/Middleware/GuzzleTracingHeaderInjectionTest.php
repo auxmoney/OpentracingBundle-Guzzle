@@ -13,7 +13,7 @@ class GuzzleTracingHeaderInjectionTest extends TestCase
 {
     private $tracingService;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->tracingService = $this->prophesize(Tracing::class);

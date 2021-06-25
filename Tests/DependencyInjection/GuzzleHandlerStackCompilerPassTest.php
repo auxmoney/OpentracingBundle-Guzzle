@@ -11,15 +11,13 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Exception\RuntimeException;
-use Symfony\Component\DependencyInjection\Reference;
 
 class GuzzleHandlerStackCompilerPassTest extends TestCase
 {
     /** @var GuzzleHandlerStackCompilerPass */
     private $subject;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -38,10 +36,7 @@ class GuzzleHandlerStackCompilerPassTest extends TestCase
         $this->subject->process($container);
     }
 
-    /**
-     * @dataProvider provideHandlerConfigWithoutHandler
-     */
-    public function testProcessHandlerConfigWithoutHandler(?array $arguments): void
+    public function testProcessHandlerConfigWithoutHandler(): void
     {
         $noClientDefinition = $this->prophesize(Definition::class);
         $noClientDefinition->getClass()->willReturn(Definition::class);
@@ -57,19 +52,7 @@ class GuzzleHandlerStackCompilerPassTest extends TestCase
         self::assertCount(4, $container->getDefinitions());
     }
 
-    public function provideHandlerConfigWithoutHandler(): array
-    {
-        return [
-            ['no config' => [[]]],
-            ['config indexed by number' => [0 => ['verify' => false]]],
-            ['config indexed by name' => ['$config' => ['verify' => false]]],
-        ];
-    }
-
-    /**
-     * @dataProvider provideHandlerConfigWithHandler
-     */
-    public function testProcessHandlerConfigWithHandler(?array $arguments): void
+    public function testProcessHandlerConfigWithHandler(): void
     {
         $noClientDefinition = $this->prophesize(Definition::class);
         $noClientDefinition->getClass()->willReturn(Definition::class);
@@ -92,10 +75,7 @@ class GuzzleHandlerStackCompilerPassTest extends TestCase
         self::assertCount(5, $container->getDefinitions());
     }
 
-    /**
-     * @dataProvider provideHandlerConfigWithHandler
-     */
-    public function testProcessHandlerConfigWithHandlerMultipleClients(?array $arguments): void
+    public function testProcessHandlerConfigWithHandlerMultipleClients(): void
     {
         $noClientDefinition = $this->prophesize(Definition::class);
         $noClientDefinition->getClass()->willReturn(Definition::class);
@@ -119,13 +99,5 @@ class GuzzleHandlerStackCompilerPassTest extends TestCase
         $this->subject->process($container);
 
         self::assertCount(7, $container->getDefinitions());
-    }
-
-    public function provideHandlerConfigWithHandler(): array
-    {
-        return [
-            ['config indexed by number' => [0 => ['verify' => false, 'handler' => new Reference('handlerServiceName')]]],
-            ['config indexed by name' => ['$config' => ['verify' => false, 'handler' => new Reference('handlerServiceName')]]],
-        ];
     }
 }

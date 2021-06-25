@@ -15,7 +15,8 @@ class TestController extends AbstractController
     /**
      * @throws GuzzleException
      */
-    public function index(ClientInterface $client) {
+    public function index(ClientInterface $client): JsonResponse
+    {
         $request = new Request('GET', 'https://github.com/auxmoney/OpentracingBundle-Guzzle');
         $contents = $client->send($request)->getBody()->getContents();
         return new JsonResponse(['nested' => true, 'contentsLength' => strlen($contents)]);

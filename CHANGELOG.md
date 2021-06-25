@@ -1,3 +1,10 @@
+## [0.6.3](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.6.2...v0.6.3) (2021-06-25)
+
+
+### Bug Fixes
+
+* drop PHP versions 7.1 and 7.2 ([#27](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/27)) ([b09285f](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/b09285f3c0d74e080e32e346aa9839ad68ecd6e3))
+
 ## [0.6.2](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.6.1...v0.6.2) (2020-12-27)
 
 

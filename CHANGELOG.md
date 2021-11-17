@@ -1,3 +1,13 @@
+# [1.0.0](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.6.3...v1.0.0) (2021-11-17)
+
+
+* feat!: update core and opentracing to v1 (#28) ([7fb1bfe](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/7fb1bfeff3b23213de700fcdf20e708de74e6454)), closes [#28](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/28)
+
+
+### BREAKING CHANGES
+
+* update core and opentracing to v1
+
 ## [0.6.3](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.6.2...v0.6.3) (2021-06-25)
 
 

@@ -12,9 +12,12 @@ use Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleTracingHeaderInjection;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class GuzzleClientFactoryDecoratorTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function setUp(): void
     {
         parent::setUp();

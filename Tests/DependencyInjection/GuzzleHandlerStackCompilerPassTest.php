@@ -9,11 +9,14 @@ use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 class GuzzleHandlerStackCompilerPassTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var GuzzleHandlerStackCompilerPass */
     private $subject;
 

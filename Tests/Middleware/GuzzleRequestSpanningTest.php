@@ -15,10 +15,13 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\ResponseInterface;
 
 class GuzzleRequestSpanningTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $requestSpanning;
     private $tracing;
 

@@ -7,10 +7,13 @@ namespace Auxmoney\OpentracingGuzzleBundle\Tests\Middleware;
 use Auxmoney\OpentracingGuzzleBundle\Middleware\GuzzleTracingHeaderInjection;
 use Auxmoney\OpentracingBundle\Service\Tracing;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\RequestInterface;
 
 class GuzzleTracingHeaderInjectionTest extends TestCase
 {
+    use ProphecyTrait;
+
     private $tracingService;
 
     public function setUp(): void

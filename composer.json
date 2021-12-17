@@ -13,7 +13,7 @@
   "type": "symfony-bundle",
   "license": "MIT",
   "require": {
-    "php": "^7.3.27",
+    "php": "^7.4|^8.0",
     "auxmoney/opentracing-bundle-core": "^1.0",
     "opentracing/opentracing": "^1.0.1",
     "guzzlehttp/guzzle": "^6.0"

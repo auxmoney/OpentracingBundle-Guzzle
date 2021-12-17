@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v1.0.0...v1.1.0) (2021-12-17)
+
+
+### Features
+
+* support PHP 8 ([#31](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/31)) ([e811171](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/e81117159904780629a766e8b0f42d81b93d61c3))
+
 # [1.0.0](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v0.6.3...v1.0.0) (2021-11-17)
 
 

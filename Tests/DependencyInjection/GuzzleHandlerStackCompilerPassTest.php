@@ -17,8 +17,7 @@ class GuzzleHandlerStackCompilerPassTest extends TestCase
 {
     use ProphecyTrait;
 
-    /** @var GuzzleHandlerStackCompilerPass */
-    private $subject;
+    private GuzzleHandlerStackCompilerPass $subject;
 
     public function setUp(): void
     {

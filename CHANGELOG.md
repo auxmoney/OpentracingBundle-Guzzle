@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v1.1.0...v1.2.0) (2022-03-28)
+
+
+### Features
+
+* support Symfony 6 ([#32](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/32)) ([4b1b9ac](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/4b1b9ac30a3d20f68f8c67cf4d072f2c54d18735))
+
 # [1.1.0](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v1.0.0...v1.1.0) (2021-12-17)
 
 

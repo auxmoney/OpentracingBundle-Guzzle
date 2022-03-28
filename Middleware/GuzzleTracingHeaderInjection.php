@@ -9,7 +9,7 @@ use Psr\Http\Message\RequestInterface;
 
 final class GuzzleTracingHeaderInjection
 {
-    private $tracingService;
+    private Tracing $tracingService;
 
     public function __construct(Tracing $tracingService)
     {

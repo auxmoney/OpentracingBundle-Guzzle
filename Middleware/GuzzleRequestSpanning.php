@@ -14,8 +14,8 @@ use Psr\Http\Message\ResponseInterface;
 
 final class GuzzleRequestSpanning
 {
-    private $requestSpanning;
-    private $tracing;
+    private RequestSpanning $requestSpanning;
+    private Tracing $tracing;
 
     public function __construct(RequestSpanning $requestSpanning, Tracing $tracing)
     {

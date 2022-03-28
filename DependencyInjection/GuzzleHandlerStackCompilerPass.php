@@ -15,9 +15,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class GuzzleHandlerStackCompilerPass implements CompilerPassInterface
 {
-    /**
-     * @return void
-     */
     public function process(ContainerBuilder $container): void
     {
         foreach ($container->getDefinitions() as $clientServiceName => $definition) {

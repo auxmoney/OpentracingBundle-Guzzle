@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v1.2.0...v1.2.1) (2022-07-21)
+
+
+### Bug Fixes
+
+* symfony/flex plugin ([#36](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/36)) ([40ee875](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/40ee875fc49f63d80f4af3034292f587aa03a6a5))
+
 # [1.2.0](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v1.1.0...v1.2.0) (2022-03-28)
 
 

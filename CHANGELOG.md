@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v1.2.1...v1.2.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* symfony cli installation ([#37](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/37)) ([f5748ed](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/f5748ed9ff52a203e89fe066ee6dd7fc00342ee2))
+
 ## [1.2.1](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v1.2.0...v1.2.1) (2022-07-21)
 
 

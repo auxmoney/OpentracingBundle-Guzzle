@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v1.2.2...v1.2.3) (2023-04-28)
+
+
+### Bug Fixes
+
+* update supported PHP and Symfony versions + fix composer behaviour + remove coveralls integration ([#40](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/40)) ([954eddc](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/954eddc71d2491a6772aa89ab0a80dfc15a73941))
+
 ## [1.2.2](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v1.2.1...v1.2.2) (2022-08-23)
 
 

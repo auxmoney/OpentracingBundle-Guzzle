@@ -1,5 +1,5 @@
 #!/bin/bash
 shopt -s extglob
 
-composer require guzzlehttp/guzzle:^${GUZZLE_VERSION}
+composer reinstall guzzlehttp/guzzle:^${GUZZLE_VERSION} --with-dependencies
 composer dump-autoload

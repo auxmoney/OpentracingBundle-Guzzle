@@ -16,7 +16,7 @@
     "php": "^8.0",
     "auxmoney/opentracing-bundle-core": "^1.3",
     "opentracing/opentracing": "^1.0.1",
-    "guzzlehttp/guzzle": "^6.0"
+    "guzzlehttp/guzzle": "^6.0|^7.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
@@ -45,15 +45,26 @@
       "@phpcs",
       "@phpmd",
       "@phpstan",
+      "@phpunit-local"
+    ],
+    "quality-ci": [
+      "@phpcs",
+      "@phpmd",
+      "@phpstan",
       "@phpunit"
     ],
     "phpmd": "vendor/bin/phpmd . text cleancode,codesize,controversial,design,naming,unusedcode --exclude vendor,Tests",
     "phpcs": "vendor/bin/phpcs",
-    "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit --colors=never --testsuite=unit",
+    "phpunit": [
+      "composer require guzzlehttp/guzzle:^${GUZZLE_VERSION} --with-dependencies",
+      "XDEBUG_MODE=coverage vendor/bin/phpunit --colors=never --testsuite=unit"
+    ],
+    "phpunit-local": "XDEBUG_MODE=coverage vendor/bin/phpunit --colors=never --testsuite=unit",
     "phpunit-functional": [
       "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/checkEnvironment.sh",
       "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/setup.sh",
       "Tests/Functional/Scripts/requireAdditionalVendors.sh",
+      "Tests/Functional/Scripts/requireGuzzle.sh",
       "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/createResetPoint.sh",
       "vendor/bin/phpunit --colors=never --testsuite=functional --no-coverage",
       "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/teardown.sh"

@@ -23,20 +23,52 @@ jobs:
         include:
           - symfony: '4.4.*'
             php: '8.0'
+            guzzle: '6'
+          - symfony: '4.4.*'
+            php: '8.0'
+            guzzle: '7'
           - symfony: '4.4.*'
             php: '8.1'
+            guzzle: '6'
+          - symfony: '4.4.*'
+            php: '8.1'
+            guzzle: '7'
           - symfony: '4.4.*'
             php: '8.2'
+            guzzle: '6'
+          - symfony: '4.4.*'
+            php: '8.2'
+            guzzle: '7'
           - symfony: '5.4.*'
             php: '8.0'
+            guzzle: '6'
+          - symfony: '5.4.*'
+            php: '8.0'
+            guzzle: '7'
           - symfony: '5.4.*'
             php: '8.1'
+            guzzle: '6'
+          - symfony: '5.4.*'
+            php: '8.1'
+            guzzle: '7'
           - symfony: '5.4.*'
             php: '8.2'
+            guzzle: '6'
+          - symfony: '5.4.*'
+            php: '8.2'
+            guzzle: '7'
           - symfony: '6.2.*'
             php: '8.1'
+            guzzle: '6'
+          - symfony: '6.2.*'
+            php: '8.1'
+            guzzle: '7'
           - symfony: '6.2.*'
             php: '8.2'
+            guzzle: '6'
+          - symfony: '6.2.*'
+            php: '8.2'
+            guzzle: '7'
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -59,9 +91,11 @@ jobs:
           # clean up recipe generated files and folders
           git clean -df
       - name: execute unit tests
+        env:
+          GUZZLE_VERSION: ${{ matrix.guzzle }}
         run: |
           composer config --no-plugins allow-plugins.symfony/flex true
-          composer run-script quality
+          composer run-script quality-ci
 
   test_functional:
     name: Functional Tests
@@ -73,20 +107,52 @@ jobs:
         include:
           - symfony: '4.4.*'
             php: '8.0'
+            guzzle: '6'
+          - symfony: '4.4.*'
+            php: '8.0'
+            guzzle: '7'
           - symfony: '4.4.*'
             php: '8.1'
+            guzzle: '6'
+          - symfony: '4.4.*'
+            php: '8.1'
+            guzzle: '7'
           - symfony: '4.4.*'
             php: '8.2'
+            guzzle: '6'
+          - symfony: '4.4.*'
+            php: '8.2'
+            guzzle: '7'
           - symfony: '5.4.*'
             php: '8.0'
+            guzzle: '6'
+          - symfony: '5.4.*'
+            php: '8.0'
+            guzzle: '7'
           - symfony: '5.4.*'
             php: '8.1'
+            guzzle: '6'
+          - symfony: '5.4.*'
+            php: '8.1'
+            guzzle: '7'
           - symfony: '5.4.*'
             php: '8.2'
+            guzzle: '6'
+          - symfony: '5.4.*'
+            php: '8.2'
+            guzzle: '7'
           - symfony: '6.2.*'
             php: '8.1'
+            guzzle: '6'
+          - symfony: '6.2.*'
+            php: '8.1'
+            guzzle: '7'
           - symfony: '6.2.*'
             php: '8.2'
+            guzzle: '6'
+          - symfony: '6.2.*'
+            php: '8.2'
+            guzzle: '7'
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -114,6 +180,7 @@ jobs:
       - name: execute functional tests
         env:
           SYMFONY_VERSION: ${{ matrix.symfony }}
+          GUZZLE_VERSION: ${{ matrix.guzzle }}
         run: |
           composer config --no-plugins allow-plugins.symfony/flex true
           composer run-script phpunit-functional

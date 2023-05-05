@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v1.2.3...v1.3.0) (2023-05-05)
+
+
+### Features
+
+* support Guzzle 7 ([#41](https://github.com/auxmoney/OpentracingBundle-Guzzle/issues/41)) ([450431d](https://github.com/auxmoney/OpentracingBundle-Guzzle/commit/450431d06bee8129d36d985c74583b1e2732f596))
+
 ## [1.2.3](https://github.com/auxmoney/OpentracingBundle-Guzzle/compare/v1.2.2...v1.2.3) (2023-04-28)
 
 
